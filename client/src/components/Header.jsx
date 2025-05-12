@@ -7,8 +7,9 @@ import {RiUserLine} from 'react-icons/ri'
 import { ShopContext } from '../context/ShopContext'
 const Header = () => {
     const [menuOpened, setMenuOpened] = useState(false)
+    const {getCartCount,navigate} = useContext(ShopContext)
     const toggleMenu = () => setMenuOpened((prev)=> !prev)
-   const {getCartCount} = useContext(ShopContext)
+   
   return (
    <header className='max-padd-container w-full mb-2'>
     <div className=' flexBetween py-3  '>
@@ -42,7 +43,7 @@ const Header = () => {
             </Link>
             {/* user profile  */}
             <div className='group relative'>
-            <button className='btn-dark flexCenter gap-x-2'>Login<RiUserLine className='text-xl'/></button>
+            <button onClick={()=>navigate('/login')} className='btn-dark flexCenter gap-x-2'>Login<RiUserLine className='text-xl'/></button>
             </div>
         </div> 
     </div>

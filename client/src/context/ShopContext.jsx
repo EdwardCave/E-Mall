@@ -74,6 +74,7 @@ const ShopContextProvider = (props) => {
   
   
   const value = {
+    navigate,
     products,
     search,
     setSearch,

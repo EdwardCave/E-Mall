@@ -6,7 +6,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa6'
 import Footer from '../components/Footer'
 import CartTotal from '../components/CartTotal'
 const Cart = () => {
-    const {products,currency,cartItems,getCartCount,updateQuantity} = useContext(ShopContext)
+    const {navigate,products,currency,cartItems,getCartCount,updateQuantity} = useContext(ShopContext)
     const [cartData, setCartData] = useState([])
     const [quantities, setQuantities] = useState({})
 
@@ -103,7 +103,7 @@ const Cart = () => {
                 <div className='flex my-20'>
                     <div className='w-full sm:w-[450px]'>
                         <CartTotal/>
-                        <button className='btn-secondary mt-7'>Checkout</button>
+                        <button onClick={()=>navigate('/place-order')} className='btn-secondary mt-7'>Checkout</button>
                     </div>
                 </div>
             </div>
