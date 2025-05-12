@@ -16,7 +16,7 @@ const ShopContextProvider = (props) => {
   if(!color){
     toast.error("Please select a color")
   }
-
+// add item to cart
     const cartData = structuredClone(cartItems)
     if (cartData[itemId]) {
       if(cartData[itemId][color]){
@@ -30,13 +30,62 @@ const ShopContextProvider = (props) => {
     }
     setCartItems(cartData) 
   }
+// get total items in cart
+  const getCartCount = () => {
+    let totalCount = 0
+    for (const items in cartItems) {
+      for (const item in cartItems[items]) {
+        totalCount += cartItems[items][item]
+      }
+    }
+    return totalCount
+  }
+
+  // update the quantity of cart item
+  const updateQuantity = (itemId,color,quantity) => {
+    let cartData = structuredClone(cartItems)
+    cartData[itemId][color] = quantity
+    setCartItems(cartData) 
+  }
+
+  // Get total cart amount
+  const getCartAmount = () => {
+    let totalAmount = 0
+    for (const items in cartItems) {
+      let itemInfo = products.find((product)=> product._id === items)
+      for(const item in cartItems[items]){
+        
+        try{
+          if(cartItems[items][item]>0){
+            totalAmount += itemInfo.price * cartItems[items][item]
+
+          }
+        }catch(e){
+          console.log(e)
+        }
+      }
+    }
+    return totalAmount
+  }
 
   useEffect(()=>{
-console.log(cartItems)
+   console.log(cartItems)
   },[cartItems])
   
   
-  const value = {products,search,setSearch,currency,delivery_charges,cartItems,setCartItems,addToCart}
+  const value = {
+    products,
+    search,
+    setSearch,
+    currency,
+    delivery_charges,
+    cartItems,
+    setCartItems,
+    addToCart,
+    getCartCount,
+    updateQuantity,
+    getCartAmount
+  }
   return (
     <ShopContext.Provider value={value}>
         {props.children}
