@@ -56,7 +56,7 @@ const Cart = () => {
 
 
   return (
-    <section>
+    <div>
         <div className='bg-primary mb-16'>
             <div className='max-padd-container py-10'>
                 <div className='flexStart gap-x-4'>
@@ -107,9 +107,10 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>   
+             
         </div>
-    </section>
+        <Footer/>  
+    </div>
   )
 }
 
