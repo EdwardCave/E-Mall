@@ -5,7 +5,7 @@ const Item = ({product}) => {
   return (
     <div>
         {/* IMAGE */}
-        <Link to={'/'} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+        <Link to={`/product/${product._id}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
         className='flexCenter p-2 bg-[#f5f5f5] overflow-hidden relative'>
         <img  src={product.image.length > 1 && hovered ?product.image[1] :product.image[0]} alt="productImg" className='transition-all duration-300'/>
         </Link>

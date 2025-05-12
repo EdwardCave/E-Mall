@@ -1,13 +1,14 @@
-import React,{useEffect, useState} from 'react'
+import React,{useContext,useEffect, useState} from 'react'
 import Title from './Title'
-import { products } from '../assets/data'
+import { ShopContext } from '../context/ShopContext'
 import Item from './Item'
 const PopularProducts = () => {
+  const {products} = useContext(ShopContext)
   const [popularProducts, setPopularProducts] = useState([])
   useEffect(() => {
     const data = products.filter(item=>item.popular)
     setPopularProducts(data.slice(0,5))
-  }, [])
+  }, [products])
   return (
     <section className='max-padd-container py-16'>
         <Title title1={`Popular`} title2={`Products`} titleStyles={`pb-10`} paraStyles={`!block`}/>
