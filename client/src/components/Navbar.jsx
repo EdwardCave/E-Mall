@@ -5,7 +5,7 @@ const Navbar = ({containerStyles,onClick}) => {
         {path:'/', name:'Home'},
         {path:'/collection', name:'Collection'},
         {path:'/blog', name:'Blog'},
-        {path:'/', name:'Contact'},
+        {path:'/Contact', name:'Contact'},
       ]
   return (
     <nav className={ `${containerStyles}`}>
