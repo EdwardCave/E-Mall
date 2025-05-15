@@ -1,6 +1,7 @@
-import React,{useState} from 'react'
+import React,{useState,useCallback} from 'react'
 import {FaCheck}from 'react-icons/fa6'
-// import upload_icon from '../assets/upload_icon.png'
+import upload from '../assets/upload.png'
+import { toast } from 'react-toastify'
 const Add = ({token}) => {
   const [images,setImages] = useState({
     image1: null,
@@ -41,6 +42,7 @@ const Add = ({token}) => {
         if(images[key])formData.append(key, images[key])
       })
       const response = await axios.post(`${backend_url}/api/product/add`,formData,{headers:{token}})
+      console.log('response',response)
       if(response.data.success){
         toast.success(response.data.message)
         setName("")
@@ -58,7 +60,7 @@ const Add = ({token}) => {
         toast.error(response.data.message)
       }
       }catch(err){
-    toast.error(err.response?.data?.message || "something went wrong")
+        toast.error(err.response?.data?.message || "something went wrong")
   }
     
   },
@@ -67,7 +69,7 @@ const Add = ({token}) => {
 
   return (
     <div className='px-2 sm:px-8 mt-2 sm:mt-14 pb-16'>
-      <form  className='flex flex-col gap-y-3 medium-14 lg:w-[777px]'>
+      <form onSubmit={onSubmitHandler} className='flex flex-col gap-y-3 medium-14 lg:w-[777px]'>
         <div className='w-full'>
           <h5>Product Name</h5>
           <input onChange={(e)=>setName(e.target.value)} value={name} type="text"  placeholder='enter product name'
@@ -106,7 +108,7 @@ const Add = ({token}) => {
             {["Black", "Red", "White", "Blue"].map((color,i) => (
               <div key={i} onClick={()=>setColors((prev)=>prev.includes(color) ? prev.filter((c)=>c!==color) : [...prev,color])}>
                 <span className='h-9 w-9 rounded-full flexCenter' style={{backgroundColor:color.toLocaleLowerCase()}}>
-                  {colors.includes(color) && <BsCheck className={color === 'white' ? 'text-black' :'text-white'}/>}
+                  {colors.includes(color) && <FaCheck className={color === 'White' ? 'text-black' :'text-white'}/>}
                 </span>
               </div>
             ))}
@@ -116,8 +118,8 @@ const Add = ({token}) => {
         <div className='flex gap-2 pt-2'>
           {["image1", "image2", "image3", "image4"].map((imgKey,i) => (
             <label key={i} htmlFor={imgKey}>
-              {/* <img src={images[imgKey] ? URL.createObjectURL(images[imgKey]) : upload_icon} alt=""
-              className='w-16 h-16 aspect-square object-cover ring-1 ring-slate-900/5 rounded-lg' /> */}
+              <img src={images[imgKey] ? URL.createObjectURL(images[imgKey]) : upload} alt=""
+              className='w-16 h-16 aspect-square object-cover ring-1 ring-slate-900/5 rounded-lg' />
               <input onChange={(e)=>handleImageChange(e,imgKey)} type="file" id={imgKey} hidden/>
             </label>
           ))}

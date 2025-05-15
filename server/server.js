@@ -21,7 +21,7 @@ app.use('/api/product',productRouter)
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('API is working!')
 })
 
 app.listen(port, () => {

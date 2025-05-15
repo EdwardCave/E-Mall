@@ -17,9 +17,9 @@ const loginUser = async (req, res) => {
             return res.json({success:false, message:"User does not exist"})
         }
         const isMatch = await bcrypt.compare(password,user.password)
-        if(!isMatch){ 
+        if(isMatch){ 
             const token = createToken(user._id)
-             res.json({success:true, token})
+            res.json({success:true, token})
         }else {
             resizeBy.json({success:false, message:"Invalid Credentials "})
         }
@@ -38,7 +38,6 @@ const registerUser = async (req, res) => {
         // checking if user already exist
         const exist = await userModel.findOne({email})
         if(exist){
-           
             return res.json({success:false, message:"User already exist"})
              // 另外一个写法
             // return res.status(400).send({message:"User already exist"})
@@ -63,7 +62,7 @@ const registerUser = async (req, res) => {
         })
         const user = await newUser.save()
         const token = createToken(user._id)
-        res.json({success:true, message:"User registered successfully",token})
+        res.json({success:true, token})
     }catch(error){
         console.log(error)
         res.json({success:false, message:error.message})
@@ -74,8 +73,8 @@ const registerUser = async (req, res) => {
 
 const adminLogin = async (req, res) => {
     try{
-        const {emial,password} = req.body
-        if(emial === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
+        const {email,password} = req.body
+        if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
             const token = jwt.sign(email + password,process.env.JWT_SECRET)
             res.json({success:true, token})
         }else {

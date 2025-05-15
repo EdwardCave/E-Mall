@@ -27,7 +27,7 @@ const Slidebar = ({setToken}) => {
 
         <div className='max-sm:ml-5 sm:mt-72'>
           <button onClick={() =>setToken("")} className='flexStart gap-x-2 p-5 sm:pl-12 medium-15 cursor-pointer h-10 rounded-xl text-red-500'>
-            <BiLogOut className='text-lg'/>
+            {/* <BiLogOut className='text-lg'/> */}
             <div className='hidden lg:flex'>Logout</div>
           </button>
         </div>

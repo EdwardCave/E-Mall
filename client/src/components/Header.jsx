@@ -7,11 +7,17 @@ import {RiUserLine} from 'react-icons/ri'
 import { ShopContext } from '../context/ShopContext'
 const Header = () => {
     const [menuOpened, setMenuOpened] = useState(false)
-    const {getCartCount,navigate} = useContext(ShopContext)
+    const {getCartCount,navigate,token,setToken} = useContext(ShopContext)
     const toggleMenu = () => setMenuOpened((prev)=> !prev)
-   
+    
+    const logout =() =>{
+      localStorage.removeItem("token")
+      setToken("")
+      navigate("/login")
+
+    }
   return (
-   <header className='max-padd-container w-full mb-2'>
+  <header className='max-padd-container w-full mb-2'>
     <div className=' flexBetween py-3  '>
         {/* logo */}
         <Link to={"/"} className=' flex flex-1 bold-24 xl:bold-28'>E-Mall</Link>
@@ -43,11 +49,27 @@ const Header = () => {
             </Link>
             {/* user profile  */}
             <div className='group relative'>
-            <button onClick={()=>navigate('/login')} className='btn-dark flexCenter gap-x-2'>Login<RiUserLine className='text-xl'/></button>
+              <div>
+                {token ? ( 
+                  <div>
+                    <TbUserCircle className='text-[29px] cursor-pointer'/>
+                  </div>
+                  
+                ):(
+                  <button onClick={()=>navigate('/login')} className='btn-dark flexCenter gap-x-2'>Login<RiUserLine className='text-xl'/></button>
+                )}
+              </div>
+              {/* drop down */}
+              {token && (
+                <ul className='bg-white p-2 w-32 ring-1 ring-slate-900/5 rounded absolute right-0 top-7 hidden group-hover:flex flex-col regular-14 shadow-md z-50'>
+                  <li onClick={()=>navigate('/orders')} className='text-tertiary rounded-md hover:bg-primary cursor-pointer'>Orders</li>
+                  <li onClick={logout} className='text-tertiary rounded-md hover:bg-primary cursor-pointer'>Logout</li>
+                </ul>
+              )}
             </div>
         </div> 
     </div>
-   </header>
+  </header>
   ) 
 }
 
