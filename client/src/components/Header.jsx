@@ -61,9 +61,9 @@ const Header = () => {
               </div>
               {/* drop down */}
               {token && (
-                <ul className='bg-white p-2 w-32 ring-1 ring-slate-900/5 rounded absolute right-0 top-7 hidden group-hover:flex flex-col regular-14 shadow-md z-50'>
-                  <li onClick={()=>navigate('/orders')} className='text-tertiary rounded-md hover:bg-primary cursor-pointer'>Orders</li>
-                  <li onClick={logout} className='text-tertiary rounded-md hover:bg-primary cursor-pointer'>Logout</li>
+                <ul className='bg-white p-2 w-32 ring-1 ring-slate-900/5 rounded absolute right-0 top-7 hidden group-hover:flex flex-col medium-14 shadow-md z-50'>
+                  <li onClick={()=>navigate('/orders')} className=' p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer'>Orders</li>
+                  <li onClick={logout} className='p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer'>Logout</li>
                 </ul>
               )}
             </div>
