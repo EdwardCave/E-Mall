@@ -2,42 +2,143 @@ import React,{useState} from 'react'
 import Title from '../components/Title'
 import CartTotal from '../components/CartTotal'
 import Footer from '../components/Footer'
+import { useContext } from 'react'
+import { ShopContext } from '../context/ShopContext'
+import { toast } from 'react-toastify'
 
 const PlaceOrder = () => {
     const [method, setMethod] =useState('cod')
+
+    const {
+        navigate,
+        products,
+        currency,
+        delivery_charges,
+        cartItems,
+        setCartItems,
+        addToCart,
+        getCartAmount,
+        token,
+        backendUrl
+    }= useContext(ShopContext)
+
+    const [formData,setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        street: '',
+        city: '',
+        state: '',
+        country: '',
+        zipCode: ''
+    })
+
+    const onChangeHandler = (event)=>{
+        const name = event.target.name
+        const value = event.target.value
+        setFormData((data)=>({...data,[name]:value}))
+    }
+
+    const onSubmitHandler = async (e)=>{
+        e.preventDefault()
+        console.log(formData)
+        try {
+            let orderItems = []
+            for(const items in cartItems){
+                for(const item in cartItems[items]){
+                    if(cartItems[items][item] > 0){
+                        const itemInfo = structuredClone(products.find((product)=> product._id === items))
+                        if(itemInfo){
+                            itemInfo.color = item
+                            itemInfo.quantity = cartItems[items][item]
+                            orderItems.push(itemInfo)
+                        }
+                    }
+                    
+                }
+            }
+            console.log(orderItems)
+
+            let orderData = {
+               
+                items: orderItems,
+                amount: getCartAmount() + delivery_charges,
+                address: formData,
+                
+            }
+            switch (method) {
+                case 'cod':
+                    const response = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}})
+                    if(response.data.success){
+                        toast.success(response.data.message)
+                        setCartItems({})
+                        navigate('/orders')
+                    }else {
+                        toast.error(response.data.message)
+                    }
+                   
+                    break;
+                
+                default:
+                    break;
+            }
+        } catch (error) {
+            toast.error(error.message)
+            
+        }
+    }
   return (
     <div>
         <div className='bg-primary mb-16'>
             {/* CONTAINER */}
-            <form className='max-padd-container py-10'>
+            <form onSubmit={onSubmitHandler} className='max-padd-container py-10'>
                 <div className='flex flex-col xl:flex-row gap-20 xl:gap-28'>
                     {/* LEFT SIDE */}
                     <div className='flex flex-col gap-3 text-[95%]'>
                         <Title title1={`Delivery`} title2={`Infomation`}  />
                         <div className='flex gap-3'>
                             <input type="text" placeholder='First Name'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
+                                name='firstName'
+                                onChange={onChangeHandler} value={formData.firstName}
+                                className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                                required/>
                             <input type="text" placeholder='Second Name'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
+                                name='lastName'
+                                onChange={onChangeHandler} value={formData.lastName}
+                                className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                                required/>
                         </div>
                         <input type="text" placeholder='Email Address'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
-                        <input type="text" placeholder='Phone Number'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
+                            onChange={onChangeHandler} value={formData.email} name='email'
+                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                            required/>
+                        <input type="number" placeholder='Phone Number'
+                            onChange={onChangeHandler} value={formData.phone} name='phone'
+                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                            required/>
                         <input type="text" placeholder='Street'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
+                            onChange={onChangeHandler} value={formData.street} name='street'
+                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                            required/>
                         
                         <div className='flex gap-3'>
                             <input type="text" placeholder='City'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
+                                onChange={onChangeHandler} value={formData.city} name='city'
+                                className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                                required/>
                         <input type="text" placeholder='State'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
+                            onChange={onChangeHandler} value={formData.state} name='state'
+                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                            required/>
                         </div>
                     
                         <div className='flex gap-3'>
-                            <input type="text" placeholder='Zip Code'
+                            <input type="number" placeholder='Zip Code'
+                            onChange={onChangeHandler} value={formData.zipCode} name='zipCode'
                                 className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
                             <input type="text" placeholder='Country'
+                            onChange={onChangeHandler} value={formData.country} name='country'
                                 className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'/>
                         </div>
                    
