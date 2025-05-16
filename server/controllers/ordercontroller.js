@@ -41,6 +41,13 @@ const placeOrderStripe = async(req,res) => {
 
 // controller function for getting all  orders data for admin panel 
 const allOrders = async(req,res) => {
+    try {
+        const orders = await orderModel.find({})
+        res.json({success:true, orders})
+    } catch (error) {
+        res.json({success:false, message:error.message})
+        
+    }
     
 }
 
@@ -58,8 +65,16 @@ const userOrders = async(req,res) => {
     
 }
 
-const updateOrderStatus = async(req,res) => {
+const updateStatus = async(req,res) => {
+    try {
+        const {orderId,status} = req.body
+
+        await orderModel.findByIdAndUpdate(orderId,{status})
+        res.json({success:true, message:"Order Status Updated Successfully"})
+    } catch (error) {
+         res.json({success:false, message:error.message})
+    }
     
 }
 
-export {placeOrder,placeOrderStripe,userOrders,allOrders,updateOrderStatus}
+export {placeOrder,placeOrderStripe,userOrders,allOrders,updateStatus}

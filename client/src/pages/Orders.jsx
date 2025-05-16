@@ -14,7 +14,7 @@ const Orders = () => {
             if(!token){
                 return null
             }
-            const response = await axios.post(backendUrl + '/api/user/userOrders',{},{headers:{token}})
+            const response = await axios.post(backendUrl + '/api/order/userorders',{},{headers:{token}})
             if(response.data.success){
                 let allOrdersItem  = []
                 response.data.orders.map(order => {
@@ -87,7 +87,7 @@ const Orders = () => {
                                                     <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
                                                     <p>{item.status}</p>
                                                 </div>
-                                                <button className='btn-secondary !p-1.5 !py-1 !text-xs'>Track Order</button>
+                                                <button onClick={loadOrderData} className='btn-secondary !p-1.5 !py-1 !text-xs'>Track Order</button>
                                             </div>
                                         </div>
                                     </div>
