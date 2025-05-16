@@ -68,7 +68,7 @@ const Login = () => {
                     </div>
                    )}
                    <div className='w-full'>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email" className='medium-15'>Email</label>
                         <input type="email" placeholder='Email---admin@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email}
                         className='w-full px-3 py-1.5 ring-1 ring-slate-900/5 rounded bg-primary mt-1' />
                    </div>

@@ -1,4 +1,4 @@
-import orderModel from "../models/ordermodel.js"
+import orderModel from "../models/orderModel.js"
 import userModel from "../models/userModel.js"
 // controller function for placing order using cod method
 const placeOrder = async(req,res) => {
@@ -47,7 +47,19 @@ const allOrders = async(req,res) => {
 // controller function for updating user order status 
 
 const userOrders = async(req,res) => {
+    try {
+        const {userId} = req.body
+        const orders = await orderModel.find({userId})
+        res.json({success:true, orders})
+    } catch (error) {
+        res.json({success:false, message:error.message})
+        
+    }
     
 }
 
-export {placeOrder,placeOrderStripe,userOrders,allOrders}
+const updateOrderStatus = async(req,res) => {
+    
+}
+
+export {placeOrder,placeOrderStripe,userOrders,allOrders,updateOrderStatus}
