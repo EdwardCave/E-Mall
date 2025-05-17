@@ -11,8 +11,8 @@ const List = ({token}) => {
       const response = await axios.get(`${backendUrl}/api/product/list`)
      if(response.data.success){
       setList(response.data.products)
-       toast.success(response.data.message)
-       await fetchList()
+      //  toast.success(response.data.message)
+      //  await fetchList()
      }else {
       toast.error(response.data.message)
      }
