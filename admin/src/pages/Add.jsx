@@ -2,7 +2,8 @@ import React,{useState,useCallback} from 'react'
 import {FaCheck}from 'react-icons/fa6'
 import upload from '../assets/upload.png'
 import { toast } from 'react-toastify'
-import { backendUrl } from '../App'
+import {backendUrl} from '../App'
+import axios from 'axios'
 const Add = ({token}) => {
   const [images,setImages] = useState({
     image1: null,
