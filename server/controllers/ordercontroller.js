@@ -1,5 +1,8 @@
 import orderModel from "../models/orderModel.js"
 import userModel from "../models/userModel.js"
+
+const currency = "pkr"
+const deliveryCharges = 10
 // controller function for placing order using cod method
 const placeOrder = async(req,res) => {
     try{
