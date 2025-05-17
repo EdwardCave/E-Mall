@@ -9,6 +9,7 @@ const List = ({token}) => {
   const fetchList = async () =>{
     try{
       const response = await axios.get(`${backendUrl}/api/product/list`)
+      console.log(response,'aaaa')
      if(response.data.success){
       setList(response.data.products)
       //  toast.success(response.data.message)
@@ -64,11 +65,8 @@ const List = ({token}) => {
               <TbTrash className='text-right md:text-center cursor-pointer text-lg'/></div>
           </div>
         )
-
         )}
- 
       </div>
-      
     </div>
   )
 }
