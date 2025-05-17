@@ -1,8 +1,9 @@
 import React ,{ useEffect,useState}from 'react'
 import axios from 'axios'
-import { backendUrl, token } from '../App'
-import TfiPackage from 'react-icons/tfi/TfiPackage'
-const Orders = () => {
+import { backendUrl } from '../App'
+import { toast } from 'react-toastify'
+// import TfiPackage from 'react-icons/tfi/TfiPackage'
+const Orders = ({token}) => {
   const [orders,setOrders] = useState([])
 
   const fetchAllOrders = async()=>{
@@ -41,7 +42,7 @@ const Orders = () => {
         {orders.map((order)=>(
           <div className='grid grid-cols-1 sm:grid-cols-[0.5fr_2fr_1fr] lg:grid-cols-[0.5fr_2fr_1fr_0.5fr_1fr] gap-4 items-start p-3 text-gray-700 bg-white rounded-lg'>
            <div className='flexCenter'>
-            <TfiPackage className='text-3xl text-secondary'/>
+            {/* <TfiPackage className='text-3xl text-secondary'/> */}
            </div>
            <div>
             <div className='flex items-start gap-1'>

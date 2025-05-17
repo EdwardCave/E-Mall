@@ -2,6 +2,7 @@ import React,{useState,useCallback} from 'react'
 import {FaCheck}from 'react-icons/fa6'
 import upload from '../assets/upload.png'
 import { toast } from 'react-toastify'
+import { backendUrl } from '../App'
 const Add = ({token}) => {
   const [images,setImages] = useState({
     image1: null,
@@ -41,7 +42,7 @@ const Add = ({token}) => {
       Object.keys(images).forEach((key)=>{
         if(images[key])formData.append(key, images[key])
       })
-      const response = await axios.post(`${backend_url}/api/product/add`,formData,{headers:{token}})
+      const response = await axios.post(`${backendUrl}/api/product/add`,formData,{headers:{token}})
       console.log('response',response)
       if(response.data.success){
         toast.success(response.data.message)
