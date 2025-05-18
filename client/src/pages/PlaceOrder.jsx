@@ -61,7 +61,6 @@ const PlaceOrder = () => {
             console.log(orderItems)
 
             let orderData = {
-               
                 items: orderItems,
                 amount: getCartAmount() + delivery_charges,
                 address: formData,
@@ -77,7 +76,6 @@ const PlaceOrder = () => {
                     }else {
                         toast.error(response.data.message)
                     }
-                   
                     break;
                 
                 default:
