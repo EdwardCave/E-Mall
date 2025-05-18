@@ -18,7 +18,7 @@ const ShopContextProvider = (props) => {
 
   const addToCart = async(itemId,color) => {
   if(!color){
-    toast.error("Please select a color")
+    toast.error("Please select a color first")
     return
   }
 // add item to cart
@@ -39,7 +39,7 @@ const ShopContextProvider = (props) => {
     if(token){
       console.log(token,'11111111')
       try{
-        await axios.post(backendUrl + '/api/user/cart',{itemId,color},{headers:{token}})
+        await axios.post(backendUrl + '/api/cart/add',{itemId,color},{headers:{token}})
       }catch(error){
         console.log(error)
         toast.error(error.message)
