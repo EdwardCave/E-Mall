@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link,NavLink} from 'react-router-dom'
 import {FaSquarePlus} from 'react-icons/fa6'
+import {BiLogOut} from 'react-icons/bi'
 const Slidebar = ({setToken}) => {
   return (
     <div className='max-sm:flexCenter max-sm:pb-3 rounded bg-white pb-3 sm:w-1/5 sm:min-h-screen'>
@@ -27,7 +28,8 @@ const Slidebar = ({setToken}) => {
 
         <div className='max-sm:ml-5 sm:mt-72'>
           <button onClick={() =>setToken("")} className='flexStart gap-x-2 p-5 sm:pl-12 medium-15 cursor-pointer h-10 rounded-xl text-red-500'>
-            {/* <BiLogOut className='text-lg'/> */}
+            <BiLogOut className='text-lg'/>
+            
             <div className='hidden lg:flex'>Logout</div>
           </button>
         </div>

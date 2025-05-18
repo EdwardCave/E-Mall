@@ -124,8 +124,12 @@ const ShopContextProvider = (props) => {
     if(!token && localStorage.getItem("token")){
       setToken(localStorage.getItem("token"))
       getUserCart(localStorage.getItem("token"))
-       getProductData()
+    
     }
+    if(token){
+    getProductData()
+    }
+    
    
   },[cartItems])
   

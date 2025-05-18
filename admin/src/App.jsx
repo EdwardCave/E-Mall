@@ -22,7 +22,7 @@ function App() {
         <Login setToken={setToken}/> 
       ): (
       <div className='bg-primary text-[#404040]'>
-        <div className='mx-auto max-w-[1440px] flex flex-col sm:flex-row'>
+        <div className='mx-auto  flex flex-col sm:flex-row'>
           <Slidebar setToken={setToken}/>
           <Routes>
             <Route path="/" element={<Add token={token}/>}></Route>

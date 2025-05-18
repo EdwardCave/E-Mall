@@ -72,7 +72,7 @@ const Add = ({token}) => {
 
   return (
     <div className='px-2 sm:px-8 mt-2 sm:mt-14 pb-16'>
-      <form onSubmit={onSubmitHandler} className='flex flex-col gap-y-3 medium-14 lg:w-[777px]'>
+      <form onSubmit={onSubmitHandler} className='flex flex-col gap-y-3 medium-14 lg:w-[1077px]'>
         <div className='w-full'>
           <h5>Product Name</h5>
           <input onChange={(e)=>setName(e.target.value)} value={name} type="text"  placeholder='enter product name'
