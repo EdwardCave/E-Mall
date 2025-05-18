@@ -19,6 +19,7 @@ const ShopContextProvider = (props) => {
   const addToCart = async(itemId,color) => {
   if(!color){
     toast.error("Please select a color")
+    return
   }
 // add item to cart
     const cartData = structuredClone(cartItems)
@@ -32,9 +33,11 @@ const ShopContextProvider = (props) => {
       cartData[itemId] = {}
       cartData[itemId][color] = 1
     }
+    console.log(cartData,'222222')
     setCartItems(cartData) 
     
     if(token){
+      console.log(token,'11111111')
       try{
         await axios.post(backendUrl + '/api/user/cart',{itemId,color},{headers:{token}})
       }catch(error){
