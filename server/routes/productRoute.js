@@ -11,7 +11,7 @@ productRouter.post('/add',adminAuth,upload.fields([
     {name:"image3",maxCount:1},
     {name:"image4",maxCount:1}
 ]),addProduct)
-productRouter.delete('/remove',adminAuth,removeProduct)
+productRouter.post('/remove',adminAuth,removeProduct)
 productRouter.get('/single',singleProduct)
 productRouter.get('/list',listProducts)
 

@@ -21,7 +21,6 @@ const Add = ({token}) => {
 
 
   const handleImageChange = (e,key) => {
-   
     setImages((prev) => ({
       ...prev,
       [key]: e.target.files[0],
@@ -43,8 +42,10 @@ const Add = ({token}) => {
       Object.keys(images).forEach((key)=>{
         if(images[key])formData.append(key, images[key])
       })
+
+      console.log('token',token)
       const response = await axios.post(`${backendUrl}/api/product/add`,formData,{headers:{token}})
-      console.log('response',response)
+      console.log('add-response',response)
       if(response.data.success){
         toast.success(response.data.message)
         setName("")
