@@ -130,7 +130,7 @@ const ShopContextProvider = (props) => {
     
     }
     
-    // getProductData()
+     getProductData()
    
     
    
