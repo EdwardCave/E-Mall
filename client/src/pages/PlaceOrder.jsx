@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import { useContext } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import { toast } from 'react-toastify'
-
+import axios from 'axios'
 const PlaceOrder = () => {
     const [method, setMethod] =useState('cod')
 
