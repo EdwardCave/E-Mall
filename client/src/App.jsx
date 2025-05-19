@@ -11,6 +11,7 @@ import Cart from './pages/Cart'
 import Login from './pages/Login'
 import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
+// import Verify from './pages/Verify'
 function App() {
 
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path='/place-order' element={<PlaceOrder/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/orders' element={<Orders/>}/>
+      {/* <Route path='/verify' element={<Verify/>}/> */}
     </Routes>
    </main>
   )
