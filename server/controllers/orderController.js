@@ -36,7 +36,7 @@ const placeOrder = async(req,res) => {
 
 // controller function for placing order using stripe method
 
-// const placeOrderStripe = async(req,res) => {
+ const placeOrderStripe = async(req,res) => {
 //     try{
 //         const {userId,items,amount,address} = req.body
 
@@ -93,12 +93,12 @@ const placeOrder = async(req,res) => {
 //     }catch(error){
 //         res.json({success:false, message:error.message})
 //     }
-// }
+ }
 
 
 // controller function for verifying stripe(this is a temporary method for test)
 
-// const verifyStripe = async(req,res) => {
+ const verifyStripe = async(req,res) => {
 //     const {orderId,success,userId} = req.body
 //     try{
 //         if(success === 'true'){
@@ -112,7 +112,7 @@ const placeOrder = async(req,res) => {
 //     }catch(error){
 //         res.json({success:false, message:error.message})
 //     }
-// }
+ }
 
 // controller function for getting all  orders data for admin panel 
 const allOrders = async(req,res) => {
