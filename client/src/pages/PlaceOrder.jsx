@@ -93,7 +93,7 @@ const PlaceOrder = () => {
             <form onSubmit={onSubmitHandler} className='max-padd-container py-10'>
                 <div className='flex flex-col xl:flex-row gap-20 xl:gap-28'>
                     {/* LEFT SIDE */}
-                    <div className='flex flex-col gap-3 text-[95%]'>
+                    <div className='flex flex-1 flex-col gap-3 text-[95%]'>
                         <Title title1={`Delivery`} title2={`Infomation`}  />
                         <div className='flex gap-3'>
                             <input type="text" placeholder='First Name'
@@ -109,15 +109,15 @@ const PlaceOrder = () => {
                         </div>
                         <input type="text" placeholder='Email Address'
                             onChange={onChangeHandler} value={formData.email} name='email'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none '
                             required/>
                         <input type="number" placeholder='Phone Number'
                             onChange={onChangeHandler} value={formData.phone} name='phone'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none'
                             required/>
                         <input type="text" placeholder='Street'
                             onChange={onChangeHandler} value={formData.street} name='street'
-                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none w-1/2'
+                            className='ring-1 ring-slate-900/15 p-1 pl-3 rounded-sm bg-white outline-none'
                             required/>
                         
                         <div className='flex gap-3'>

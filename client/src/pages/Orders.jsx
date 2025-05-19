@@ -1,9 +1,8 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect,useState} from 'react'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios'
-import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 import Title from '../components/Title'
-import orderModel from '../../../server/models/orderModel'
 import Footer from '../components/Footer'
 const Orders = () => {
 
@@ -26,7 +25,7 @@ const Orders = () => {
                         allOrdersItem.push(item)
                     });
                 });
-                setOrderData(allOrdersItem)
+                setOrderData(allOrdersItem.reverse())
             }else{
                 toast.error(response.data.message)
             }
@@ -45,59 +44,56 @@ const Orders = () => {
             {/* container */}
             <div className='max-padd-container py-10'>
                 <Title title1={'Orders'} title2={'List'} title1Styles={'h3'} titleStyles={'pb-10'}/>
-                {orderData.map((item,i)=>(
-                    <div key={i} className='bg-white rounded-lg p-2 mt-3'>
-                        <div className='text-gray-700 flex flex-col gap-4'>
-                            <div className='flex gap-x-3 w-full'>
-                                {/* image */}
-                                <div className='flex gap-6'>
-                                    <img src={item.image[0]} alt="" className='sm:w-[99px] rounded-lg aspect-square object-cover'/>
-                                </div>
-                                {/* order info */}
-                                <div className='block w-full'>
-                                    <h5 className='h5 capitalize line-clamp-1'>{item.name}</h5>
-                                    <div className='flexBetween flex-wrap'>
-                                        <div>
-                                            <div className='flex items-center gap-x-2 sm:gap-x-3'>
-                                                <div className='flexCenter gap-x-2'>
-                                                    <h5 className='medium-14'>Price:</h5>
-                                                    <p>{currency}{item.price}</p>
+                    {orderData.map((item,i)=>(
+                        <div key={i} className='bg-white rounded-lg p-2 mt-3'>
+                            <div className='text-gray-700 flex flex-col gap-4'>
+                                <div className='flex gap-x-3 w-full'>
+                                    {/* image */}
+                                    <div className='flex gap-6'>
+                                        <img src={item.image[0]} alt="" className='sm:w-[99px] rounded-lg aspect-square object-cover'/>
+                                    </div>
+                                    {/* order info */}
+                                    <div className='block w-full'>
+                                        <h5 className='h5 capitalize line-clamp-1'>{item.name}</h5>
+                                        <div className='flexBetween flex-wrap'>
+                                            <div>
+                                                <div className='flex items-center gap-x-2 sm:gap-x-3'>
+                                                    <div className='flexCenter gap-x-2'>
+                                                        <h5 className='medium-14'>Price:</h5>
+                                                        <p>{currency}{item.price}</p>
+                                                    </div>
+                                                    <div className='flexCenter gap-x-2'>
+                                                        <h5 className='medium-14'>Quantity:</h5>
+                                                        <p>{item.quantity}</p>
+                                                    </div>
+                                                    <div className='flexCenter gap-x-2'>
+                                                        <h5 className='medium-14'>Color:</h5>
+                                                        <p>{item.color}</p>
+                                                    </div>
                                                 </div>
-                                                <div className='flexCenter gap-x-2'>
-                                                    <h5 className='medium-14'>Quantity:</h5>
-                                                    <p>{item.quantity}</p>
+                                                <div className='flex items-center gap-x-2'>
+                                                        <h5 className='medium-14'>Date:</h5>
+                                                        <p>{new Date(item.date).toDateString()}</p>
                                                 </div>
-                                                <div className='flexCenter gap-x-2'>
-                                                    <h5 className='medium-14'>Color:</h5>
-                                                    <p>{item.color}</p>
+                                                <div className='flex items-center gap-x-2'>
+                                                        <h5 className='medium-14'>Payment:</h5>
+                                                        <p>{item.paymentMethod}</p>
                                                 </div>
-                                                <div className='flexCenter gap-x-2'>
-                                                    <h5 className='medium-14'>Date:</h5>
-                                                    <p>{new Date(item.date).toDateString()}</p>
-                                                </div>
-                                                <div className='flexCenter gap-x-2'>
-                                                    <h5 className='medium-14'>Payment:</h5>
-                                                    <p>{item.paymentMethod}</p>
-                                                </div>
-
                                             </div>
-                                            {/* status & button */}
-                                            <div className='flex gap-3'>
-                                                <div className='flex items-centergap-2'>
-                                                    <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
-                                                    <p>{item.status}</p>
+                                                {/* status & button */}
+                                                <div className='flex gap-3'>
+                                                    <div className='flex items-center gap-2'>
+                                                        <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
+                                                        <p>{item.status}</p>
+                                                    </div>
+                                                    <button onClick={loadOrderData} className='btn-secondary !p-1.5 !py-1 !text-xs'>Track Order</button>
                                                 </div>
-                                                <button onClick={loadOrderData} className='btn-secondary !p-1.5 !py-1 !text-xs'>Track Order</button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        
-                    </div>
-                ))}
+                    ))}
             </div>
         </div>
         <Footer/>
