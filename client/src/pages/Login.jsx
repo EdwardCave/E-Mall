@@ -1,5 +1,5 @@
 import React,{useContext, useState,useEffect} from 'react'
-import login from '../assets/login.png'
+import login from '../assets/login.jpg'
 import { ShopContext } from '../context/ShopContext'
 import {toast} from 'react-toastify'
 import axios from 'axios'
@@ -50,7 +50,7 @@ const Login = () => {
         {/* CONTAINER */}
         <div className='flex h-full w-full'>
             {/* IMAGE SIDE */}
-            <div className='w-1/2 hidden sm:block'>
+            <div className='w-2/3 hidden sm:block'>
                 <img src={login} alt="" className='object-cover w-full h-full'/>
             </div>
             {/* FORM SIDE */}
@@ -60,27 +60,27 @@ const Login = () => {
                         <h3 className='bold-36'>{currState}</h3>
 
                     </div>
-                   {currState === 'Sign Up' && (
+                {currState === 'Sign Up' && (
                     <div className='w-full'>
                         <label htmlFor="name">Name</label>
                         <input type="text" placeholder='Name' onChange={(e) => setName(e.target.value)} value={name}
                         className='w-full px-3  py-1.5 ring-1 ring-slate-900/5 rounded bg-primary mt-1' />
                     </div>
-                   )}
-                   <div className='w-full'>
+                )}
+                <div className='w-full'>
                         <label htmlFor="email" className='medium-15'>Email</label>
                         <input type="email" placeholder='Email---admin@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email}
                         className='w-full px-3 py-1.5 ring-1 ring-slate-900/5 rounded bg-primary mt-1' />
-                   </div>
-                   <div className='w-full'>
+                </div>
+                <div className='w-full'>
                         <label htmlFor="password" className='medium-15'>Password</label>
                         <input type="passwor" placeholder='Password--admin1234' onChange={(e) => setPassword(e.target.value)} value={password}
                         className='w-full px-3 py-1.5 ring-1 ring-slate-900/5 rounded bg-primary mt-1' />
-                   </div>
-                   <button type="submit" className='btn-dark w-full mt-5 !py-[8px] !rounded'>{currState === 'Sign Up' ? 'Sign Up' : 'Sign In'}</button>
-                   <div className='w-full flex flex-col gap-y-3'>
+                </div>
+                <button type="submit" className='btn-dark w-full mt-5 !py-[8px] !rounded'>{currState === 'Sign Up' ? 'Sign Up' : 'Sign In'}</button>
+                <div className='w-full flex flex-col gap-y-3'>
                     {currState === 'Login' ? (
-                       <>
+                <>
                         <div className='underline medium-15'>Forgot your password</div>
                         
                             <div className='underline medium-15'>
@@ -93,7 +93,7 @@ const Login = () => {
                             </div>
                         
                         )}
-                   </div>
+                </div>
                 </form>
             </div>
         </div>
